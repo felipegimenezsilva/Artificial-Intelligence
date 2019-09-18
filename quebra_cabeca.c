@@ -2,6 +2,15 @@
 
 #define abs(x) ((x)>0?(x):-(x))
 
+/* recebe vetor e a direcao (d)
+ * Movimentos (alfabeto) : 
+ *		cima 			d=0
+ *		direita 		d=1
+ *		baixo			d=2
+ *		esquerda 	d=3
+ */
+ enum {cima, direita,baixo,esquerda};
+
 // variaveis de controle
 int swap_indices[9][4] =
 {	{-1 , 1,  3, -1},
@@ -22,13 +31,7 @@ int posicao_livre = 0 ;
 // troca dois valores do vetor (recebe vetor, indice i, e indice j)
 #define swap(v,i,j) {v[i]^=v[j]; v[j]^=v[i]; v[i]^=v[j];}
 
-/* recebe vetor e a direcao (d)
- * Movimentos (alfabeto) : 
- *		cima 			d=0
- *		direita 		d=1
- *		baixo			d=2
- *		esquerda 	d=3
- */
+// move o espaço vazio para uma direção
 #define move(v,d) { swap(v,posicao_livre,swap_indices[posicao_livre][d]); posicao_livre = swap_indices[posicao_livre][d];} 
 
 /* verifica se é possivel mover*/
@@ -66,7 +69,7 @@ int main()
 	int at[9]= {0,1,2,3,4,5,6,7,8};
 	int fn[9]= {1,0,2,3,4,5,7,8,6};
 	
-	if(can_move(at,1)) move(at,1);
+	if(can_move(at,direita)) move(at,direita);
 	
 	printf("%i\n",(heu[0])(at,fn));
 	show(at);
